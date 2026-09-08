@@ -1,7 +1,6 @@
 class Macstash < Formula
   desc "Capture a macOS development environment and rebuild it on another Mac"
   homepage "https://github.com/aroranikhil786/macstash"
-  version "0.1.0"
   license "Apache-2.0"
 
   on_macos do
@@ -21,8 +20,10 @@ class Macstash < Formula
   end
 
   test do
-    # The release script embeds the tag, so the binary reports "v0.1.0".
-    assert_match "macstash v#{version}", shell_output("#{bin}/macstash version")
+    # Asserted literally rather than through #{version}: the release script
+    # embeds the git tag, so the binary reports "v0.1.0" while Homebrew scans
+    # "0.1.0" from the URL, and interpolating would double the v.
+    assert_match "macstash v0.1.0", shell_output("#{bin}/macstash version")
     # `capture` is deliberately not exercised here: it re-executes itself under
     # sandbox-exec and walks the whole home directory, neither of which belongs
     # in a formula test.
