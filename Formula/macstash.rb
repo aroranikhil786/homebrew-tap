@@ -2,6 +2,10 @@ class Macstash < Formula
   desc "Capture a macOS development environment and rebuild it on another Mac"
   homepage "https://github.com/aroranikhil786/macstash"
   license "Apache-2.0"
+  # Kept despite `brew audit --strict` calling it redundant. The audit scans a
+  # single URL; with arch-conditional urls the loader has no version at load
+  # time and the tap fails outright with "invalid syntax in tap".
+  version "0.1.0"
 
   on_macos do
     on_arm do
